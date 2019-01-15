@@ -39,6 +39,7 @@ public class SearchComponent extends LinearLayout {
 
     /**
      * Public method to inflate initiate component, to be called outside of class after it has been created.
+     * Array adapter is set to list and watcher is set on search field.
      */
     public void initiate(){
         setOrientation(VERTICAL);
@@ -53,6 +54,7 @@ public class SearchComponent extends LinearLayout {
 
     /**
      * Public method to get data from chosen Url, to be called outside of class after it has been created.
+     * Volley request queue is created, and then a stringRequest is added to it.
      * @param url String url to fetch word document from.
      */
     public void getDataFromUrl(String url){
@@ -61,7 +63,7 @@ public class SearchComponent extends LinearLayout {
     }
 
     /**
-     * Set watcher for search query input
+     * Set watcher for search query input to update array adapter after text has been changed.
      * @param searchInput EditText for input
      */
     private void setWatcher(EditText searchInput){
@@ -83,6 +85,8 @@ public class SearchComponent extends LinearLayout {
 
     /**
      * Function to create a Volley Request and split text document with words into list of strings.
+     * The text document is split by new line, and each word inserted into the classes wordlist.
+     * Toast is shown if request fails.
      * @param url String url to fetch word document from.
      * @return StringRequest (Volley) ready to be added to the queue.
      */
@@ -115,7 +119,10 @@ public class SearchComponent extends LinearLayout {
     }
 
     /**
-     * Function to update what the array adapter displays, based on the inserted search query.
+     * Function to update the array adapter data source, based on the inserted search query.
+     * The word list is iterated and each word is checked.
+     * If search query is an empty string, array adapter is just cleared.
+     * If no matches found, a toast to inform the user is shown.
      * @param searchQuery String search query to update array adapter against.
      */
     private void updateAdapter(String searchQuery){
