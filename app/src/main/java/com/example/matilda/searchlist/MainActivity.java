@@ -9,6 +9,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Create search component, get data and instantiate.
         SearchComponent searchComponent = (SearchComponent) findViewById(R.id.search_component);
         searchComponent.getDataFromUrl("http://runeberg.org/words/ss100.txt");
         searchComponent.initiate();

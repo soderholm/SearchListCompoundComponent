@@ -37,6 +37,9 @@ public class SearchComponent extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    /**
+     * Public method to inflate initiate component, to be called outside of class after it has been created.
+     */
     public void initiate(){
         setOrientation(VERTICAL);
         inflate(getContext(),R.layout.search_component,this);
@@ -48,11 +51,19 @@ public class SearchComponent extends LinearLayout {
         setWatcher(searchInput);
     }
 
+    /**
+     * Public method to get data from chosen Url, to be called outside of class after it has been created.
+     * @param url String url to fetch word document from.
+     */
     public void getDataFromUrl(String url){
         RequestQueue queue = Volley.newRequestQueue(getContext());
         queue.add(createWordListRequest(url));
     }
 
+    /**
+     * Set watcher for search query input
+     * @param searchInput EditText for input
+     */
     private void setWatcher(EditText searchInput){
         searchInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -70,6 +81,11 @@ public class SearchComponent extends LinearLayout {
         });
     }
 
+    /**
+     * Function to create a Volley Request and split text document with words into list of strings.
+     * @param url String url to fetch word document from.
+     * @return StringRequest (Volley) ready to be added to the queue.
+     */
     private StringRequest createWordListRequest(String url){
         return new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -88,10 +104,20 @@ public class SearchComponent extends LinearLayout {
         });
     }
 
+    /**
+     * Function to check if a word contains the search query.
+     * @param word String to be checked for match
+     * @param searchQuery String to be matched against
+     * @return Boolean True if match, otherwise False.
+     */
     private static Boolean checkForMatch(String word, String searchQuery){
         return word.contains(searchQuery);
     }
 
+    /**
+     * Function to update what the array adapter displays, based on the inserted search query.
+     * @param searchQuery String search query to update array adapter against.
+     */
     private void updateAdapter(String searchQuery){
         arrayAdapter.clear();
 
